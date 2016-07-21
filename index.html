@@ -17,15 +17,20 @@ _pcq.push(['APIReady', callbackFunction]);
 
 //some code here
 
-function callbackFunction() {
-      console.log(pushcrew.subscriberId); // will return something like this if current user is a subscriber '1c5d546172cfb4be65a8d51b047c4804'
+window._pcq = window._pcq || [];
+_pcq.push(['subscriptionSuccessCallback',callbackFunctionOnSuccessfulSubscription]); //registers callback function to be called when user gets successfully subscribed
 
-  console.log(pushcrew.subscriberId); // will return false(boolean) if user is not subscribed to push notifications
+function callbackFunctionOnSuccessfulSubscription(subscriberId, values) {
+    console.log('User got successfully subscribed.');
 
-  console.log(pushcrew.subscriberId); // will return -1(integer) if user has blocked push notifications from your website   
+    console.log(subscriberId); //will output the user's subscriberId
+
+    console.log(values.status); // SUBSCRIBED or ALREADYSUBSCRIBED
+
+    console.log(values.message) // 'User has subscribed to push notifications.' or 'User is already subscribed to push notifications.'
+
+    console.log('Now you may run code which should be executed once user gets successfully subscribed.');
 }
-
-
 </script>
 </head>
 <body>

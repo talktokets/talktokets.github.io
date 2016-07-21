@@ -17,31 +17,8 @@
 //some code here
 
 window._pcq = window._pcq || [];
-_pcq.push(['subscriptionSuccessCallback',callbackFunctionOnSuccessfulSubscription]); //registers callback function to be called when user gets successfully subscribed
 
-function callbackFunctionOnSuccessfulSubscription(subscriberId, values) {
-    console.log('User got successfully subscribed.');
-
-    console.log(subscriberId); //will output the user's subscriberId
-
-    console.log(values.status); // SUBSCRIBED or ALREADYSUBSCRIBED
-
-    console.log(values.message) // 'User has subscribed to push notifications.' or 'User is already subscribed to push notifications.'
-
-    console.log('Now you may run code which should be executed once user gets successfully subscribed.');
-}
-
-_pcq.push(['subscriptionFailureCallback',callbackFunctionOnFailedSubscription]); //registers callback function to be called when user gets successfully subscribed
-
-function callbackFunctionOnFailedSubscription(values) {
-    console.log('User could not get subscribed to push notifications');
-
-    console.log(values.status); // BLOCKED , UNSUBSCRIBED or CANCELLED
-
-    console.log(values.message) // 'User has blocked push notifications.', 'User has unsubscribed from push notifications', 'No change in subscription. Child window was closed.' or 'User has closed the notifications opt-in.'
-
-    console.log('Now you may run code which should be executed once user subscription fails');
-}
+window._pcq.push(['triggerOptIn',{subscriberSegment: 'homepage', modal: {text: 'For getting nstant alerts, please subscribe.', blackenBackground: true}}]); //Calls triggerOptIn with default text,  blackened background and segment and default segment as 'homepage'
 
 _pcq.push(['removeSubscriberFromSegment', 'homepage', callbackForRemoveFromSegment]);
 
